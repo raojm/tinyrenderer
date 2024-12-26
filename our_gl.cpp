@@ -16,8 +16,10 @@ void lookat(const vec3 eye, const vec3 center, const vec3 up) { // check https:/
     vec3 z = (center-eye).normalized();
     vec3 x =  cross(up,z).normalized();
     vec3 y =  cross(z, x).normalized();
+    //构建模型坐标的基向量
     mat<4,4> Minv = {{{x.x,x.y,x.z,0},   {y.x,y.y,y.z,0},   {z.x,z.y,z.z,0},   {0,0,0,1}}};
     mat<4,4> Tr   = {{{1,0,0,-eye.x}, {0,1,0,-eye.y}, {0,0,1,-eye.z}, {0,0,0,1}}};
+    //先平移再旋转 模型坐标转世界坐标的矩阵
     ModelView = Minv*Tr;
 }
 
